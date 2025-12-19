@@ -39,7 +39,7 @@ jobs:
           adc ping \
             --backend apisix \
             --server http://localhost:9180 \
-            --token "$edd1c9f034335f136f87ad84b625c8f1"
+            --token "edd1c9f034335f136f87ad84b625c8f1"
       
       - name: Apply APISIX Declarative Config
         env:
