@@ -2,13 +2,13 @@ name: APISIX Routes CI
 
 on:
   push:
-    paths:
-      - "apisix/routes/**"
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   apply-routes:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
