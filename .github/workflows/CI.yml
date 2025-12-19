@@ -1,21 +1,30 @@
-name: APISIX GitOps Deployment
+name: APISIX Routes CI
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - "apisix/routes/**"
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: self-hosted
+  apply-routes:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy APISIX config
+      - name: Apply APISIX route
         env:
           APISIX_ADMIN_URL: ${{ secrets.APISIX_ADMIN_URL }}
           APISIX_ADMIN_KEY: ${{ secrets.APISIX_ADMIN_KEY }}
         run: |
-          ./scripts/deploy-apisix.sh
+          ROUTE_ID=hello-route
+          ROUTE_FILE=APISIX-GITOPS/routes/users-route.json
+
+          echo "Applying route $ROUTE_ID"
+
+          curl -X PUT "http://localhost:9180/apisix/admin/routes/apisix/admin/routes/$ROUTE_ID" \
+            -H "X-API-KEY: edd1c9f034335f136f87ad84b625c8f1" \
+            -H "Content-Type: application/json" \
+            -d @"$ROUTE_FILE"
