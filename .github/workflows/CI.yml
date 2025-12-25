@@ -2,7 +2,7 @@ name: Deploy APISIX Configuration
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
     paths:
       - 'routes/**'
       - 'services/**'
