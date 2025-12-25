@@ -1,5 +1,0 @@
-{
-  "uri": "/api/hello",
-  "methods": ["GET"],
-  "upstream_id": "simple-backend"
-}
